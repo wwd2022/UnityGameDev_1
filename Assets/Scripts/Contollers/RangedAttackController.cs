@@ -45,9 +45,26 @@ public class RangedAttackController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (levelCollisionLayer.value == (levelCollisionLayer.value | (1 << collision.gameObject.layer)))
+        if (levelCollisionLayer.value == (levelCollisionLayer.value | (1 << collision.gameObject.layer))) // 레벨레이어와 비교
         {
             DestroyProjectile(collision.ClosestPoint(transform.position) - _direction * .2f, fxOnDestory);
+        }
+        else if (_attackData.target.value == (_attackData.target.value | (1 << collision.gameObject.layer))) // 충돌한 객체와 비교
+        {
+            HealthSystem healthSystem = collision.GetComponent<HealthSystem>();
+            if (healthSystem != null)
+            {
+                healthSystem.ChangeHealth(-_attackData.power); // 대미지 계산
+                if (_attackData.isOnKnockback) // 넉백
+                {
+                    TopDownMovement movement = collision.GetComponent<TopDownMovement>();
+                    if (movement != null)
+                    {
+                        movement.ApplyKnockback(transform, _attackData.knockbackPower, _attackData.knockbackTime);
+                    }
+                }
+            }
+            DestroyProjectile(collision.ClosestPoint(transform.position), fxOnDestory);
         }
     }
 

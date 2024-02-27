@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: Player_RangedAttackData
   m_EditorClassIdentifier: 
   size: 1
-  delay: 0.2
-  power: 2
+  delay: 0.1
+  power: 1
   speed: 10
   target:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   isOnKnockback: 1
   knockbackPower: 5
   knockbackTime: 0.1

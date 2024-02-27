@@ -19,7 +19,7 @@ public class TopDownRangeEnemyContreoller : TopDownEnemyController
         {
             if (distance <= shootRange)
             {
-                int layerMaskTarget = Stats.CurrentStates.attackSO.target;
+                int layerMaskTarget = Stats.CurrentStats.attackSO.target;
                 // 나와 플레이어 사시에 막혀있는 지형이 있는지 확인한다
                 RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, 11f, (1 << LayerMask.NameToLayer("Level")) | layerMaskTarget);
 

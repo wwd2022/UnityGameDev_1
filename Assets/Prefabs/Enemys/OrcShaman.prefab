@@ -17,7 +17,9 @@ GameObject:
   - component: {fileID: 3184721778655690401}
   - component: {fileID: 1536699281776240457}
   - component: {fileID: 2423517084973077886}
-  m_Layer: 0
+  - component: {fileID: 7715690856385719366}
+  - component: {fileID: 6406904446809616416}
+  m_Layer: 6
   m_Name: OrcShaman
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -197,6 +199,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e2fe7f49cd9be94f9fe3bf17420e026, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &7715690856385719366
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3955146797712263383}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bca379db286ecc64893f9cde507ca53e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthChangeDelay: 0.5
+--- !u!114 &6406904446809616416
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3955146797712263383}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3647eec588bac0f439ddc7635314f434, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4177201082176160137
 GameObject:
   m_ObjectHideFlags: 0
@@ -206,7 +233,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7829310672890370453}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: WeaponPivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -239,7 +266,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1698694634963724940}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BulletSpawnPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -271,7 +298,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2297498608828204518}
   - component: {fileID: 3210965638873779332}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: WeaponSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -361,7 +388,7 @@ GameObject:
   - component: {fileID: 4323548349619974493}
   - component: {fileID: 4453815280449115559}
   - component: {fileID: 2874983869634198712}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: MainSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
