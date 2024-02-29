@@ -94,7 +94,7 @@ public class RangedAttackController : MonoBehaviour
     {
         if (createFx)
         {
-
+            _projectileManager.CreateImpactParticlesAtPostion(position, _attackData);
         }
         gameObject.SetActive(false);
     }

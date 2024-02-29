@@ -31,4 +31,13 @@ public class ProjectileManager : MonoBehaviour
         obj.SetActive(true);
     }
 
+    public void CreateImpactParticlesAtPostion(Vector3 position, RangedAttackData attackData) // 이 위치에 파티클을 찍겠다
+    {
+        _impactParticleSystem.transform.position = position; // 파티클 위치를 바꾼다
+        ParticleSystem.EmissionModule em = _impactParticleSystem.emission; // 파티클의 애미션(생성하는거)를 가져온다
+        em.SetBurst(0, new ParticleSystem.Burst(0, Mathf.Ceil(attackData.size * 5)));
+        ParticleSystem.MainModule mainModule = _impactParticleSystem.main;
+        mainModule.startSpeedMultiplier = attackData.size * 10f;
+        _impactParticleSystem.Play(); // 파티클 플레이
+    }
 }
