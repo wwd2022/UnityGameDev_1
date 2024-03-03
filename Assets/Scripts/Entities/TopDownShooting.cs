@@ -11,6 +11,8 @@ public class TopDownShooting : MonoBehaviour
     [SerializeField] private Transform projectileSpawnPosition;
     private Vector2 _aimDirection = Vector2.right;
 
+    public AudioClip shootingClip;
+
 
     private void Awake()
     {
@@ -49,12 +51,15 @@ public class TopDownShooting : MonoBehaviour
     {
         _projectileManager.ShootBullet(
             projectileSpawnPosition.position,
-            RotatVector2(_aimDirection,angle),
+            RotateVector2(_aimDirection, angle),
             rangedAttackData
             );
+
+        if (shootingClip) // 오디오 클립이 있으면 사운드매니저에게 실형시켜 달라고 한다
+            SoundManager.PlayClip(shootingClip);
     }
 
-    private static Vector2 RotatVector2(Vector2 v, float degree)
+    private static Vector2 RotateVector2(Vector2 v, float degree)
     {
         return Quaternion.Euler(0, 0, degree) * v;
     }
