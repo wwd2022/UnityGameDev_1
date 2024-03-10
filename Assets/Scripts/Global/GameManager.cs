@@ -32,6 +32,9 @@ public class GameManager : MonoBehaviour
 
     public List<GameObject> rewards = new List<GameObject>();
 
+    [SerializeField] private CharacterStats defaultStats;
+    [SerializeField] private CharacterStats rangedStats;
+
     private void Awake()
     {
         instance = this;
@@ -55,7 +58,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        // UpgradeStatInit(); // 업그레이드
+        UpgradsStatInit(); // 업그레이드
         StartCoroutine("StartNextWave"); // 코루틴 시작
     }
 
@@ -71,7 +74,7 @@ public class GameManager : MonoBehaviour
 
                 if (currentWaveIndex % 20 == 0)
                 {
-                    // RandomUpgrade(); // 랜덤 업그레이드
+                    RandomUpgrade(); // 랜덤 업그레이드
                 }
 
                 if (currentWaveIndex % 10 == 0)
@@ -99,6 +102,8 @@ public class GameManager : MonoBehaviour
                         int prefabIdx = Random.Range(0, enemyPrefebs.Count); // 무작위 몹 선택
                         GameObject enemy = Instantiate(enemyPrefebs[prefabIdx], spawnPostions[posIdx].position, Quaternion.identity); // 몹 생성 
                         enemy.GetComponent<HealthSystem>().OnDeath += OnEnemyDeath; // 몹사망시 카운트 감소
+                        enemy.GetComponent<CharacterStatsHandler>().AddStatModifier(defaultStats);
+                        enemy.GetComponent<CharacterStatsHandler>().AddStatModifier(rangedStats);
 
                         currentSpawnCount++; // 몹 카운트 증가
                         yield return new WaitForSeconds(spawnInterval); // spawnInterval 초간 대기
@@ -153,4 +158,48 @@ public class GameManager : MonoBehaviour
         Instantiate(obj, spawnPostions[posIdx].position, Quaternion.identity);
     }
 
+    void UpgradsStatInit()
+    {
+        defaultStats.statsChangeType = StatsChangeType.Add;
+        defaultStats.attackSO = Instantiate(defaultStats.attackSO);
+
+        rangedStats.statsChangeType = StatsChangeType.Add;
+        rangedStats.attackSO = Instantiate(rangedStats.attackSO);
+    }
+
+    void RandomUpgrade()
+    {
+        switch (Random.Range(0, 6))
+        {
+            case 0:
+                defaultStats.maxHealth += 2;
+                break;
+
+            case 1:
+                defaultStats.attackSO.power += 1;
+                break;
+
+            case 2:
+                defaultStats.speed += 0.1f;
+                break;
+
+            case 3:
+                defaultStats.attackSO.isOnKnockback = true;
+                defaultStats.attackSO.knockbackPower += 1;
+                defaultStats.attackSO.knockbackTime = 0.1f;
+                break;
+
+            case 4:
+                defaultStats.attackSO.delay -= 0.05f;
+                break;
+
+            case 5:
+                RangedAttackData rangedAttackData = rangedStats.attackSO as RangedAttackData;
+                rangedAttackData.numberofProjectilesPerShot += 1;
+                break;
+
+            default:
+                break;
+        }
+    }
 }
